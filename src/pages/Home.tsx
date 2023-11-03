@@ -18,7 +18,7 @@ function Home() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const file = e.target[0]?.files[0];
+    const file = (e.target as HTMLFormElement).file.files[0];
     if (!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);

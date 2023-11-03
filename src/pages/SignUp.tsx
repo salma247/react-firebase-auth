@@ -13,7 +13,11 @@ import googleIcon from "../assets/google-icon.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, registerWithEmailAndPassword, signInWithGoogle} from "../utils/firebase/auth";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../utils/firebase/auth";
 import { useEffect } from "react";
 
 export default function SignUp() {
@@ -35,11 +39,13 @@ export default function SignUp() {
     const email = data.get("email");
     const password = data.get("password");
     const name = data.get("name");
+    console.log(email, password, name);
+
     if (email && password && name) {
       registerWithEmailAndPassword(
+        name.toString(),
         email.toString(),
-        password.toString(),
-        name.toString()
+        password.toString()
       );
     }
   };
