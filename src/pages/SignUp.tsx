@@ -39,7 +39,6 @@ export default function SignUp() {
     const email = data.get("email");
     const password = data.get("password");
     const name = data.get("name");
-    console.log(email, password, name);
 
     if (email && password && name) {
       registerWithEmailAndPassword(
