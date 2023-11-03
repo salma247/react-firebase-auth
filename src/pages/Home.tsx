@@ -2,7 +2,7 @@ import { useState } from "react";
 import { storage } from "../utils/firebase/storage";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import {
-  LinearProgress,
+  CircularProgress,
   Input,
   Alert,
   AlertTitle,
@@ -18,7 +18,7 @@ function Home() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const file = (e.target as HTMLFormElement).file.files[0];
+    const file = (e.target as any)[0]?.files[0];
     if (!file) return;
     const storageRef = ref(storage, `files/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -48,19 +48,17 @@ function Home() {
   };
 
   return (
-    <Grid container sx={{ justifyContent: "center", px: 2 }}>
+    <Grid container sx={{ justifyContent: "center", px: 2, py: 1 }}>
       <form onSubmit={handleSubmit}>
         <Input type="file" />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" variant="contained" sx={{ ml: 2 }}>
+          Submit
+        </Button>
       </form>
-      {progresspercent > 0 && progresspercent < 100 && (
-        <LinearProgress
-          variant="determinate"
-          value={progresspercent}
-          sx={{ bgcolor: "secondary.main", height: 10 }}
-        />
-      )}
-      {imgUrl && (
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        {progresspercent > 0 && progresspercent < 100 && <CircularProgress />}
+      </div>
+      {imgUrl && progresspercent === 100 && (
         <>
           <Alert severity="success" sx={{ width: "100%" }}>
             <AlertTitle>Uploaded successfully. Here is your image!</AlertTitle>
@@ -68,7 +66,7 @@ function Home() {
           <img
             src={imgUrl}
             alt="uploaded"
-            style={{ maxWidth: "500px", height: "auto" }}
+            style={{ maxWidth: "500px", maxHeight: "500px" }}
           />
         </>
       )}
