@@ -50,10 +50,15 @@ function Home() {
   return (
     <Grid container sx={{ justifyContent: "center", px: 2, py: 1 }}>
       <form onSubmit={handleSubmit}>
+        <Grid item xs={12}>
         <Input type="file" />
-        <Button type="submit" variant="contained" sx={{ ml: 2 }}>
+        </Grid>
+
+        <Grid container justifyContent="center" sx={{ mt: 2 }}>
+        <Button type="submit" variant="contained">
           Submit
         </Button>
+        </Grid>
       </form>
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
         {progresspercent > 0 && progresspercent < 100 && <CircularProgress />}
@@ -66,7 +71,7 @@ function Home() {
           <img
             src={imgUrl}
             alt="uploaded"
-            style={{ maxWidth: "500px", maxHeight: "500px" }}
+            style={{ maxWidth: "500px", maxHeight: "500px", width: "100%", height: "100%" }}
           />
         </>
       )}
