@@ -60,7 +60,7 @@ function Home() {
       </div>
       {imgUrl && progresspercent === 100 && (
         <>
-          <Alert severity="success" sx={{ width: "100%" }}>
+          <Alert severity="success" sx={{ width: "100%", my:2 }}>
             <AlertTitle>Uploaded successfully. Here is your image!</AlertTitle>
           </Alert>
           <img
